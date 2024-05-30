@@ -1,5 +1,6 @@
 package com.example.care_application
 
+import ButtonAdapter
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -9,9 +10,20 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ArrayAdapter
+import android.widget.Button
 import com.example.care_application.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+import android.widget.ListView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+
+class MainActivity : AppCompatActivity(), ButtonAdapter.OnButtonClickListener {
+
+    private lateinit var recyclerView: RecyclerView
+    private val buttonList = listOf<String>("Button 1", "Button 2", "Button 3")
+    private lateinit var arrayAdapter: ArrayAdapter<String>
+    private lateinit var buttonAdapter: ButtonAdapter
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -20,18 +32,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
 
-        setSupportActionBar(binding.toolbar)
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+//        binding.fab.setOnClickListener { view ->
+//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                .setAction("Action", null).show()
+//        }
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+        recyclerView = findViewById(R.id.recycler_view)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        buttonAdapter = ButtonAdapter(buttonList, this)
+        recyclerView.adapter = buttonAdapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -54,5 +66,9 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
+    }
+
+    override fun onButtonClick(position: Int) {
+        println("hello" + position)
     }
 }
