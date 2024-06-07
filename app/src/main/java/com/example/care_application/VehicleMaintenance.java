@@ -1,10 +1,10 @@
 package com.example.care_application;
 
 import java.util.HashMap;
-import java.util.Map;
+import java.util.HashMap;
 
 public class VehicleMaintenance {
-    private Map<String, Integer> maintenanceSchedule;
+    private HashMap<String, Integer> maintenanceSchedule;
 
     public VehicleMaintenance() {
         maintenanceSchedule = new HashMap<>();
@@ -22,7 +22,7 @@ public class VehicleMaintenance {
         maintenanceSchedule.put("ΚΤΕΟ", 12);
     }
 
-    public Map<String, Integer> getMaintenanceSchedule() {
+    public HashMap<String, Integer> getMaintenanceSchedule() {
         return maintenanceSchedule;
     }
 }
