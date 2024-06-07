@@ -12,7 +12,7 @@ public class Profile {
         this.vehicles=new ArrayList<>();
         this.editCreateVehicle=new EditCreateVehicle();
     }
-
+//getters
     public String getId(){
         return id;
     }
@@ -24,7 +24,7 @@ public class Profile {
     public EditCreateVehicle getEditCreateVehicle(){
         return editCreateVehicle;
     }
-
+//setters
     public void setEditCreateVehicle(EditCreateVehicle editCreateVehicle) {
         this.editCreateVehicle = editCreateVehicle;
     }
